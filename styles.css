@@ -490,3 +490,21 @@ footer { padding: 14px; text-align: center; color: var(--muted); font-size: .78r
     grid-column: 1 / -1;
   }
 }
+
+/* Dashboard V2: force three checklist columns on normal desktop widths */
+@media (min-width: 850px) {
+  .app-shell { width: min(1700px, calc(100% - 20px)); }
+  .checklist-dashboard {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    align-items: start;
+  }
+  .checklist-dashboard .checklist-card { margin: 0 !important; min-width: 0; }
+  #monthlySection { grid-column: auto !important; }
+  .checklist-dashboard .item-list { grid-template-columns: 1fr !important; }
+}
+@media (min-width: 650px) and (max-width: 849px) {
+  .checklist-dashboard { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  #monthlySection { grid-column: 1 / -1; }
+}
