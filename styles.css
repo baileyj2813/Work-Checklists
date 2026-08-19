@@ -422,3 +422,71 @@ footer { padding: 14px; text-align: center; color: var(--muted); font-size: .78r
     padding: 6px;
   }
 }
+
+
+/* Three-column dashboard layout */
+.checklist-dashboard {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+@media (min-width: 1050px) {
+  .app-shell {
+    width: min(1560px, calc(100% - 28px));
+  }
+
+  .checklist-dashboard {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .checklist-dashboard .checklist-card {
+    margin: 0;
+    min-width: 0;
+    height: auto;
+  }
+
+  .checklist-dashboard .item-list {
+    grid-template-columns: 1fr;
+  }
+
+  .checklist-dashboard .task-group + .task-group {
+    margin-top: 7px;
+  }
+
+  .checklist-dashboard .section-heading {
+    min-height: 58px;
+  }
+
+  .checklist-dashboard .title-row {
+    gap: 6px;
+  }
+
+  .checklist-dashboard h2 {
+    font-size: 1.06rem;
+  }
+
+  .checklist-dashboard .reset-pill {
+    font-size: .61rem;
+  }
+
+  .checklist-dashboard .item-text {
+    font-size: .79rem;
+  }
+
+  .checklist-dashboard .task-group summary {
+    font-size: .82rem;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 1049px) {
+  .checklist-dashboard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #monthlySection {
+    grid-column: 1 / -1;
+  }
+}
