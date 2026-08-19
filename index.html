@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#6d67d8" />
+  <title>Workday Checklist</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">WORK ROUTINES</p>
+        <h1>Workday Checklist</h1>
+        <p class="subtitle">Stay on top of the recurring work without having to remember what resets when.</p>
+      </div>
+      <div class="date-card">
+        <span id="todayLabel"></span>
+        <strong id="todayDate"></strong>
+      </div>
+    </header>
+
+    <section class="overview" aria-label="Checklist overview">
+      <div class="overview-card">
+        <span>Daily</span>
+        <strong id="dailyOverview">0 / 0</strong>
+      </div>
+      <div class="overview-card">
+        <span>Weekly</span>
+        <strong id="weeklyOverview">0 / 0</strong>
+      </div>
+      <div class="overview-card">
+        <span>Monthly</span>
+        <strong id="monthlyOverview">0 / 0</strong>
+      </div>
+    </section>
+
+    <section id="dailySection" class="checklist-card" data-section="daily">
+      <div class="section-heading">
+        <div>
+          <div class="title-row">
+            <h2>Daily Checklist</h2>
+            <span class="reset-pill">Resets every day</span>
+          </div>
+          <p id="dailyResetText" class="reset-detail"></p>
+        </div>
+        <div class="progress-ring" id="dailyRing" aria-label="Daily progress"><span>0%</span></div>
+      </div>
+      <div class="progress-track"><div id="dailyProgress" class="progress-fill"></div></div>
+      <div id="dailyList" class="item-list"></div>
+      <form class="add-form" data-add="daily">
+        <input type="text" maxlength="100" placeholder="Add a daily task…" aria-label="Add a daily task" />
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <section id="weeklySection" class="checklist-card" data-section="weekly">
+      <div class="section-heading">
+        <div>
+          <div class="title-row">
+            <h2>Weekly Checklist</h2>
+            <span class="reset-pill">Resets every Monday</span>
+          </div>
+          <p id="weeklyResetText" class="reset-detail"></p>
+        </div>
+        <div class="progress-ring" id="weeklyRing" aria-label="Weekly progress"><span>0%</span></div>
+      </div>
+      <div class="progress-track"><div id="weeklyProgress" class="progress-fill"></div></div>
+      <div id="weeklyList" class="item-list"></div>
+      <form class="add-form" data-add="weekly">
+        <input type="text" maxlength="100" placeholder="Add a weekly task…" aria-label="Add a weekly task" />
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <section id="monthlySection" class="checklist-card" data-section="monthly">
+      <div class="section-heading">
+        <div>
+          <div class="title-row">
+            <h2>Monthly Checklist</h2>
+            <span class="reset-pill">Resets on the 7th</span>
+          </div>
+          <p id="monthlyResetText" class="reset-detail"></p>
+        </div>
+        <div class="progress-ring" id="monthlyRing" aria-label="Monthly progress"><span>0%</span></div>
+      </div>
+      <div class="progress-track"><div id="monthlyProgress" class="progress-fill"></div></div>
+      <div id="monthlyList" class="item-list"></div>
+      <form class="add-form" data-add="monthly">
+        <input type="text" maxlength="100" placeholder="Add a monthly task…" aria-label="Add a monthly task" />
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <footer>
+      <p>Progress is saved automatically on this device.</p>
+    </footer>
+  </main>
+
+  <template id="itemTemplate">
+    <div class="check-item">
+      <button class="check-button" type="button" aria-label="Toggle task complete">
+        <span class="checkmark">✓</span>
+      </button>
+      <span class="item-text"></span>
+      <button class="delete-button" type="button" aria-label="Delete task" title="Delete task">×</button>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
