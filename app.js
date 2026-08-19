@@ -11,7 +11,8 @@ const DEFAULTS = {
     ["Cash & Banking", "Positive Pay Monitoring and Decisioning"],
     ["Admin & Communication", "Respond to Emails"],
     ["Admin & Communication", "Organize Inboxes"],
-    ["Admin & Communication", "Assigning Project/SM Agreement Numbers"]
+    ["Admin & Communication", "Assigning Project/SM Agreement Numbers"],
+    ["Admin & Communication", "Update Monday.com"]
   ],
   weekly: [
     ["Check Run & Payments", "Select Checks for Printing"],
@@ -34,7 +35,6 @@ const DEFAULTS = {
     ["Concur", "Concur Intercompany Entries and Emails"],
     ["Other Monthly", "Bambora — Technically for the Previous Month but gets done as a Current Month Transaction Within AP Unapproved Invoice Entry"],
     ["Other Monthly", "Enterprise FM Lease Payment"],
-    ["Other Monthly", "Update Monday.com"],
     ["Other Monthly", "Nvoice Credit Entry"]
   ]
 };
@@ -119,6 +119,21 @@ function loadState() {
 }
 
 let state = loadState();
+
+// Workflow update: Monday.com is now a daily task instead of monthly.
+// Reconcile existing saved browser data so users upgrading from Dashboard V2
+// get the change without having to clear their checklist history.
+(function reconcileMondayTask() {
+  const taskText = "Update Monday.com";
+  const monthly = state.sections.monthly.items;
+  const daily = state.sections.daily.items;
+  const oldIndex = monthly.findIndex(item => item.text === taskText);
+  if (oldIndex !== -1) monthly.splice(oldIndex, 1);
+  if (!daily.some(item => item.text === taskText)) {
+    daily.push({ id: newId(), group: "Admin & Communication", text: taskText, completed: false });
+  }
+})();
+
 const openGroups = new Set();
 
 function saveState() {
