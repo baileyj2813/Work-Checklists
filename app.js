@@ -3,16 +3,16 @@ const LEGACY_STORAGE_KEY = "workdayChecklist_v2";
 
 const DEFAULTS = {
   daily: [
-    ["Accounts Payable", "AP Invoice Entry"],
-    ["Accounts Payable", "AP Invoice Research/Followup"],
-    ["Accounts Payable", "Reminders to Approve AP Invoices"],
-    ["Accounts Payable", "AP Invoice Posting"],
-    ["Cash & Banking", "Lockbox and ACH Deposit Entries"],
-    ["Cash & Banking", "Positive Pay Monitoring and Decisioning"],
     ["Admin & Communication", "Respond to Emails"],
     ["Admin & Communication", "Organize Inboxes"],
     ["Admin & Communication", "Assigning Project/SM Agreement Numbers"],
-    ["Admin & Communication", "Update Monday.com"]
+    ["Admin & Communication", "Update Monday.com"],
+    ["Cash & Banking", "Lockbox and ACH Deposit Entries"],
+    ["Cash & Banking", "Positive Pay Monitoring and Decisioning"],
+    ["Accounts Payable", "AP Invoice Entry"],
+    ["Accounts Payable", "AP Invoice Research/Followup"],
+    ["Accounts Payable", "Reminders to Approve AP Invoices"],
+    ["Accounts Payable", "AP Invoice Posting"]
   ],
   weekly: [
     ["Check Run & Payments", "Select Checks for Printing"],
@@ -120,18 +120,35 @@ function loadState() {
 
 let state = loadState();
 
-// Workflow update: Monday.com is now a daily task instead of monthly.
-// Reconcile existing saved browser data so users upgrading from Dashboard V2
-// get the change without having to clear their checklist history.
-(function reconcileMondayTask() {
+// Workflow update: Monday.com is a Daily > Admin & Communication task.
+// Reconcile existing saved browser data and force the requested Daily group order.
+(function reconcileDailyWorkflow() {
   const taskText = "Update Monday.com";
   const monthly = state.sections.monthly.items;
   const daily = state.sections.daily.items;
-  const oldIndex = monthly.findIndex(item => item.text === taskText);
-  if (oldIndex !== -1) monthly.splice(oldIndex, 1);
-  if (!daily.some(item => item.text === taskText)) {
-    daily.push({ id: newId(), group: "Admin & Communication", text: taskText, completed: false });
+
+  // Remove every saved Monthly copy of Monday.com.
+  state.sections.monthly.items = monthly.filter(item => item.text !== taskText);
+
+  // Reuse an existing Daily copy if present; otherwise create it.
+  let mondayItem = daily.find(item => item.text === taskText);
+  if (!mondayItem) {
+    mondayItem = { id: newId(), group: "Admin & Communication", text: taskText, completed: false };
+    daily.push(mondayItem);
   }
+  mondayItem.group = "Admin & Communication";
+
+  // Force the Daily group order: Admin & Communication, Cash & Banking, Accounts Payable.
+  const order = new Map([
+    ["Admin & Communication", 0],
+    ["Cash & Banking", 1],
+    ["Accounts Payable", 2]
+  ]);
+  state.sections.daily.items = daily.slice().sort((a, b) => {
+    const ga = order.has(a.group) ? order.get(a.group) : 99;
+    const gb = order.has(b.group) ? order.get(b.group) : 99;
+    return ga - gb;
+  });
 })();
 
 const openGroups = new Set();
