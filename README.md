@@ -1,18 +1,15 @@
-# Workday Checklist
+# Workday Checklist Dashboard V7
 
-A browser-based recurring work checklist.
+Changes in V7:
+- Respond to Emails now has Co 77, Co 75, and Co 10 sub-checkmarks.
+- Organize Inboxes now has Co 77, Co 75, and Co 10 sub-checkmarks.
+- AP Invoice Entry now has Co 77, Co 75, and Co 10 sub-checkmarks.
+- Update Monday.com moved from Daily to Weekly.
+- Review Vendor Statements now has Co 77, Co 75, and Co 10 sub-checkmarks.
+- Concur Expense Review now has Co 77, Co 75, and Co 10 sub-checkmarks.
+- Concur GL and JC Import/Journal Entries now has Co 77, Co 75, and Co 10 sub-checkmarks.
+- Bambora now has Co 77, Co 75, and Co 10 sub-checkmarks.
+- Journal Entries remain separate checkmarks for Fixed Assets, PP Assets, PP Software, and Rental Lease Payment. PP Ins remains removed.
+- Daily, Weekly, and Monthly reset rules are unchanged.
 
-## Reset rules
-- Daily checklist resets every day.
-- Weekly checklist resets every Monday.
-- Monthly checklist resets on the 7th of every month.
-
-## Features
-- 9 daily tasks, 6 weekly tasks, and 14 monthly tasks preloaded.
-- Tasks are organized into expandable work groups.
-- A group stays open when tasks are checked or unchecked.
-- Progress and completion state are saved in localStorage.
-- Existing data from the earlier v2 starter app is migrated automatically.
-- New custom tasks can still be added and are placed in an “Other” group.
-
-Open `index.html` in a browser to run it.
+For GitHub Pages, replace index.html and upload app-v7.js and styles-v7.css. Old versioned JS/CSS files can be deleted after V7 is live.
