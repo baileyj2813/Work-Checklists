@@ -1,8 +1,3 @@
-# Workday Checklist Dashboard V8
+Work Checklist Dashboard V11
 
-Changes in V8:
-- Added CAT Tax as its own checkmark under Monthly > Journal Entries.
-- Preserves all V7 workflow changes and migrates saved completion status where possible.
-- Daily resets each day, Weekly resets Monday, Monthly resets on the 7th.
-
-For GitHub Pages, replace index.html and upload app-v8.js and styles-v8.css. After V8 is live, old versioned JS/CSS files can be deleted.
+Monthly Journal Entries and Other Reconciliations combines the former Journal Entries and Other Monthly dropdowns. All original tasks, including Bambora company checkmarks, remain. Daily/Weekly/Monthly reset schedules and the V10 collapsible Review Vendor Statements are retained. Upload index.html, app-v11.js and styles-v11.css to GitHub Pages. Prior saved checkmarks are migrated when possible.
